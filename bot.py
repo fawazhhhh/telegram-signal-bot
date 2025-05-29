@@ -4,7 +4,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-TOKEN = "8067149612:AAH8_RotPca46jwxAk9bWONzOWB6Yf56CF8"
+TOKEN = "7803079502:AAE967yp04T8Gy5z66Xd8hwQsi9XfZcVcyk"
 CHAT_ID = "7890943736"
 
 bot = telebot.TeleBot(TOKEN)
@@ -14,15 +14,15 @@ def send_signal(signal):
 
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.send_message(message.chat.id, "✅ البوت يعمل الآن تلقائيًا، وسيتم إرسال الإشارات كل 15 ثانية.")
+    bot.send_message(message.chat.id, "بوت الإشارات بدأ ✅")
 
 def analyze_market():
     try:
-        url = "https://app.eobroker.com/en/trade/smart"
+        url = "https://app.eobroker.com/"
         headers = {
             "User-Agent": "Mozilla/5.0"
         }
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers)
         soup = BeautifulSoup(response.text, "html.parser")
 
         text = soup.text.lower()
