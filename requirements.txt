@@ -1,3 +1,2 @@
-pyTelegramBotAPI==4.14.0
-beautifulsoup4
-requests
+selenium
+pyTelegramBotAPI
