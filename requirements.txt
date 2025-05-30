@@ -1,2 +1,5 @@
 selenium
 pyTelegramBotAPI
+Pillow
+pytesseract
+webdriver-manager
