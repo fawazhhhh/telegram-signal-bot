@@ -1,4 +1,3 @@
-
 import time
 import logging
 import telebot
@@ -17,10 +16,11 @@ TELEGRAM_BOT_TOKEN = '7803079502:AAE967yp04T8Gy5z66Xd8hwQsi9XfZcVcyk'
 CHAT_ID = '7890943736'
 bot = telebot.TeleBot(TELEGRAM_BOT_TOKEN)
 
-# إنشاء المتصفح
+# إنشاء المتصفح المتوافق مع سيرفر Render
 def create_driver():
     chrome_options = Options()
-    chrome_options.add_argument("--headless=new")
+    chrome_options.binary_location = "/usr/bin/google-chrome"
+    chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--window-size=1920,1080")
@@ -49,7 +49,7 @@ def login_and_navigate(driver):
     driver.get("https://app.expertoption.com/trading/SMART")
     time.sleep(10)
 
-# قراءة السوق الحقيقي OCR
+# قراءة الشاشة (OCR)
 def read_indicators_with_ocr(driver):
     screenshot = driver.get_screenshot_as_png()
     image = Image.open(io.BytesIO(screenshot))
@@ -105,7 +105,7 @@ def analyze_market():
         logging.error(f"خطأ في التحليل: {e}")
         send_signal_to_telegram("جاري التحليل")
 
-# تشغيل كل دقيقة
+# التشغيل المتكرر
 def run_bot():
     while True:
         analyze_market()
